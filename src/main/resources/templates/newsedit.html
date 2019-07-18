@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apeiron News Edit</title>
+</head>
+<body th:fragment="content">
+	<br>
+	<h2>Изменить новость</h2>
+	<div id="addnewsform">
+		<form name="editnews" th:action="@{/news/add}"
+			enctype="multipart/form-data" method="post">
+			<div>
+				<label for="id1"><b>ID:</b></label>
+				<div id="labelid" th:text="${news.id}"></div>
+				<input type="text" name="id" id="id1" th:value="${news.id}" required>
+			</div>
+			<div>
+				<label for="topic1"><b>Тема:</b></label> <input type="text"
+					name="topic" id="topic1" th:value="${news.topic}" required>
+			</div>
+			<div>
+				<label for="text1"><b>Текст:</b></label>
+				<textarea rows="10" cols="45" name="text" id="text1"
+					th:field="${news.text}" required></textarea>
+			</div>
+			<div>
+				<label for="date1"><b>Дата:</b></label> <input type="text"
+					name="date" id="date1" th:value="${news.date}" required>
+			</div>
+			<button type="submit">Сохранить!</button>
+		</form>
+	</div>
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Forum</title>
+<link rel="stylesheet">
+</head>
+<body th:fragment="content">
+	<br>
+	<table>
+		<tr>
+			<th width="50%"><a href="/forum/addTheme">Добавить новую
+					тему</a></th>
+			<th width="50%"><a
+				th:href="@{'/forum/showMyThemes/' + ${#authentication.getPrincipal().getUsername()}}">Список
+					моих тем</a></th>
+		</tr>
+	</table>
+	<br>
+	<table>
+		<thead>
+			<tr>
+				<th><h3 class="colorwhite">Название темы</h3></th>
+				<th><h3 class="colorwhite">Пользователь</h3></th>
+				<th><h3 class="colorwhite">Дата</h3></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="post : ${forum}">
+				<td><a th:href="@{'/forum/showTheme/' + ${post.id}}"
+					th:text="${post.name}"></a></td>
+				<td>
+					<div th:if="*{#strings.length(post.author.login)<30}">
+						<div th:text="${post.author.login}"></div>
+					</div>
+				</td>
+				<td id="newseditordate"
+					th:text="${#strings.substring(post.date,0,16)}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

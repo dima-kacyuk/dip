@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<title>Header</title>
+</head>
+<body th:fragment="header">
+	<div>
+		<nav class="menu">
+			<ul>
+				<li><a href="#" class="logo"></a></li>
+				<li><a href="#">Игра</a></li>
+				<li><a href="/news">Новости</a></li>
+				<li><a href="/forum">Форум</a></li>
+				<li><a href="/community">Сообщество</a></li>
+				<li><a href="/faq" class="fix">Вопросы и ответы</a></li>
+				<li sec:authorize="hasRole('ROLE_ADMIN')"><a href="#"
+					class="admin-link">Администрирование</a>
+					<ul class="submenu">
+						<li><a href="/users">Пользователи</a></li>
+						<li><a href="#">Поддержка</a></li>
+						<li><a href="/news/editor">Новости</a></li>
+						<li><a href="/forum/editor">Форум</a></li>
+						<li><a href="/faq/editor">Вопросы и ответы</a></li>
+					</ul></li>
+			</ul>
+			<div class="rightmenu">
+				<div sec:authorize="not hasRole('ROLE_ADMIN')">
+					<a href="#"><img src="/resources/images/support.png"></a>
+				</div>
+				<div>
+					<a href="/profile"><img src="/resources/images/user.png"></a>
+				</div>
+				<th:block sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="post">
+						<input class="singoutinput" type="submit" value="Выход" />
+					</form>
+				</th:block>
+			</div>
+		</nav>
+	</div>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Edit theme</title>
+</head>
+<body th:fragment="content">
+	<br>
+	<h2 class="centertext">Изменить тему</h2>
+	<div id="addnewsform">
+		<form name="editforum"
+			th:action="@{'/forum/addEditedTheme/' + ${forum.id}}"
+			enctype="multipart/form-data" method="post">
+			<div>
+				<input type="text" name="id" id="id1" th:value="${forum.id}"
+					required>
+			</div>
+			<div>
+				<label for="topic1"><b>Тема:</b></label> <input type="text"
+					name="name" id="topic1" th:value="${forum.name}" required>
+			</div>
+			<div>
+				<label for="text1"><b>Описание:</b></label>
+				<textarea rows="10" cols="45" name="description" id="text1"
+					th:field="${forum.description}" required></textarea>
+			</div>
+			<button type="submit">Сохранить!</button>
+		</form>
+	</div>
+</body>
+</html>

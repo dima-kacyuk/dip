@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Forum theme</title>
+<link rel="stylesheet" href="css/news.css">
+</head>
+<body th:fragment="content">
+	<br>
+	<div class="postcontainer">
+		<h2 th:text="${theme.name}"></h2>
+		<hr>
+		<h2 th:text="${theme.description}"></h2>
+		<div class="lineblock">
+			<div th:text="${theme.author.login}"></div>
+			<div
+				th:text="${#strings.substring(theme.date,0,16)}"></div>
+		</div>
+		<hr>
+	</div>
+	<form class="postcontainer" name="addcomment" th:action="@{'/forum/addMessageToTheme/'+${theme.id}}"
+			enctype="multipart/form-data" method="post">
+			<div>
+				<label id="labeladdnews" for="text1"><b>Текст:</b></label>
+			</div>
+				<textarea rows="7" cols="40" name="text" id="text1" required></textarea>
+				<input type="hidden" th:value="${#authentication.getPrincipal().getUsername()}" name="login"/>
+			<button type="submit">Опубликовать!</button>
+			<hr>
+		</form>
+	<div class="postcontainer" th:each="message : ${messages}">
+		<div class="lineblock">
+			<div th:text="${message.author.login}"></div>
+			<div th:text="${#strings.substring(message.date,0,16)}"></div>
+			<div id="messagedeletebutton"><a id="deletemessagebutton"
+					th:href="@{'/forum/deleteMessage/' + ${#authentication.getPrincipal().getUsername()}} + '/'+${theme.id} +'/' + ${message.id}">&#10006;</a></div>
+			
+		</div>
+		<h2 th:text="${message.text}"></h2>
+		<hr>
+	</div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apeiron News</title>
+<link rel="stylesheet" href="css/news.css">
+</head>
+<body th:fragment="content">
+	<br>
+	<div th:each="post : ${news}">
+		<div class="newspost">
+			<h2 th:text="${post.topic}"></h2>
+			<div class="newspostdate"
+				th:text="${#strings.substring(post.date,0,10)}"></div>
+			<span
+				th:utext="${#strings.replace(post.text, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></span>
+		</div>
+	</div>
+</body>
+</html>

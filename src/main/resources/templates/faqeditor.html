@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apeiron FAQ Editor</title>
+</head>
+<body th:fragment="content">
+	<br>
+	<h2 class="h2centerleft">Добавить FAQ</h2>
+	<div id="addnewsform">
+		<form name="addfaq" th:action="@{/faq/add}"
+			enctype="multipart/form-data" method="post">
+			<div>
+				<label id="labeladdnews" for="question1"><b>Вопрос:</b></label>
+			</div>
+			<input type="text" name="question" id="question1" required><br>
+			<div>
+				<label id="labeladdnews" for="answer1"><b>Ответ:</b></label>
+			</div>
+			<textarea rows="7" cols="40" name="answer" id="answer1" required></textarea>
+			<button type="submit">Опубликовать!</button>
+		</form>
+	</div>
+	<br>
+	<table>
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Вопрос</th>
+				<th>Ответ</th>
+				<th>Изменить</th>
+				<th>Удалить</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="faq : ${faqs}">
+				<td id="newseditorid" th:text="${faq.id}"></td>
+				<td>
+					<div th:if="*{#strings.length(faq.question)>30}">
+						<div th:text="${#strings.substring(faq.question,0,30)}"></div>
+					</div>
+					<div th:if="*{#strings.length(faq.question)<30}">
+						<div th:text="${faq.question}"></div>
+					</div>
+				</td>
+				<td>
+					<div th:if="*{#strings.length(faq.answer)>30}">
+						<div th:text="${#strings.substring(faq.answer,0,30)}"></div>
+					</div>
+					<div th:if="*{#strings.length(faq.answer)<30}">
+						<div th:text="${faq.answer}"></div>
+					</div>
+				</td>
+				<td id="newseditorbutton"><a th:href="@{edit}+${faq.id}">&#x270e;</a></td>
+				<td id="newseditorbutton"><a id="deletenewsbutton"
+					onclick="return confirm('Вы уверены, что хотите удалить этот FAQ?\nЕсли &#34;ДА&#34; Нажмите &#34;ОК&#34;!')"
+					th:href="@{delete/}+${faq.id}">&#10006;</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

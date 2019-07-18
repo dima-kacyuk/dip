@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apeiron Profile</title>
+<link rel="stylesheet" href="css/news.css">
+</head>
+<body th:fragment="content">
+	<br>
+	<h2 class="h2centerleft">Мой профиль</h2>
+	<div class="proficenter">
+		<div class="profileleft">
+			<img width="200px" src="/images/profile.png"><br>
+			<table id="profitable">
+				<thead>
+					<tr>
+						<td>Матчей:</td>
+						<td><h3 th:text="${user.gamesCount}"></h3></td>
+					</tr>
+					<tr>
+						<td>Побед:</td>
+						<td><h3 th:text="${user.winsCount}"></h3></td>
+					</tr>
+					<tr>
+						<td>Рейтинг:</td>
+						<td><h3 th:text="${user.rating}"></h3></td>
+					</tr>
+			</table>
+		</div>
+
+		<div id="profiform">
+			<form name="editprofile" th:action="@{/profile/edit}"
+				enctype="multipart/form-data" method="post">
+				<div>
+					<label for="id1" class="idlabel"><b>ID:</b></label>
+					<div id="labelid" class="idlabel" th:text="${user.id}"></div>
+					<input type="text" name="id" id="id1" th:value="${user.id}"
+						required>
+				</div>
+				<div>
+					<label for="login1"><b>Логин:</b> <span
+						th:text="${user.login}"></span></label> <input type="text" name="login"
+						id="login1" th:value="${user.login}" required>
+				</div>
+				<div>
+					<label for="email1"><b>E-mail:</b></label> <input type="text"
+						name="email" id="email1" th:value="${user.email}" required>
+				</div>
+
+				<div>
+					<label for="gender1"><b>Пол:</b></label> <select name="gender"
+						id="gender1" th:value="${user.gender}">
+						<option value="мужина" th:selected="${user.gender=='мужчина'}">мужчина</option>
+						<option value="женщина" th:selected="${user.gender=='женщина'}">женщина</option>
+					</select>
+				</div>
+
+				<div>
+					<label for="age1"><b>Возраст:</b></label> <input type="number"
+						min="1" max="100" name="age" id="age1" th:value="${user.age}">
+				</div>
+
+				<div>
+					<label for="country1"><b>Страна:</b></label> <input type="text"
+						name="country" id="country1" th:value="${user.country}" required>
+				</div>
+
+				<div>
+					<label for="password1"><b>Пароль:</b></label> <input
+						type="password" name="password" id="password1"
+						th:value="${user.password}" required>
+				</div>
+				<input type="text" name="gamesCount" id="gamesCount1"
+					th:value="${user.gamesCount}" required> <input type="text"
+					name="winsCount" id="winsCount1" th:value="${user.winsCount}"
+					required> <input type="text" name="rating" id="rating1"
+					th:value="${user.rating}" required>
+				<button type="submit">Изменить!</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link
+	href="https://fonts.googleapis.com/css?family=PT+Serif&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" href="/resources/css/main.css">
+<link rel="shortcut icon" href="/resources/images/favicon.png" type="image/png">
+</head>
+<body>
+	<div sec:authorize="hasRole('ROLE_BANNED')">Вы ЗАБАНЕНЫ за нарушение
+		одного из правил сообщества!</div>
+	<div sec:authorize="not hasRole('ROLE_BANNED')">
+		<div sec:authorize="isAuthenticated()"
+			th:replace="fragments/header :: header">Header</div>
+		<div sec:authorize="isAuthenticated()"
+			th:replace="${contentPage} :: content">Content</div>
+	</div>
+	<div sec:authorize="not isAuthenticated()" th:replace="hello :: hello">Content</div>
+</body>
+</html>

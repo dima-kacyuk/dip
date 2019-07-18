@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+	class="h-100">
+<head>
+<title>Вход на сайт APEIRON</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="/resources/css/registration.css">
+<link rel="shortcut icon" href="/resources/images/favicon.png" type="image/png">
+</head>
+<body>
+	<br>
+	<div class="center">
+		<img src="../images/logo_a.png">
+	</div>
+	<h1 class="center">Авторизация в APEIRON</h1>
+	<div class=" center alert alert-danger" th:if="${param.error}">Неверное
+		имя пользователя или пароль</div>
+	<div class="center alert alert-danger" th:if="${param.logout}">Вы
+		вышли из системы</div>
+	<div class="center">
+		<div id="adduserform">
+			<form th:action="@{/login}" method="post">
+				<input type="hidden" name="${_csrf.parameterName}"
+					value="${_csrf.token}" />
+				<div>
+					<label for="name"><b>Логин:</b></label> <input type="text"
+						id="name" name="username">
+				</div>
+				<div>
+					<label for="password"><b>Пароль:</b></label> <input type="password"
+						id="password" name="password">
+				</div>
+				<div class="center">
+					<button type="submit">Подтвердить</button>
+				</div>
+			</form>
+			<div class="center">
+				<a href="/registration" role="button">Регистрация</a>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

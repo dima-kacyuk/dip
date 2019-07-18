@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apeiron FAQ</title>
+<link rel="stylesheet" href="css/news.css">
+</head>
+<body th:fragment="content">
+	<br>
+	<div th:each="faq : ${faqs}">
+		<div class="postcontainer">
+			<div class="postquestion"
+				th:utext="@{'&#9658; '}+${#strings.replace(faq.question, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></div>
+			<div class="postanswer"
+				th:utext="${#strings.replace(faq.answer, T(System).getProperty('line.separator'), '&lt;br /&gt;')}"></div>
+		</div>
+	</div>
+</body>
+</html>

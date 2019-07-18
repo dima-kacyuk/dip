@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Add theme</title>
+</head>
+<body th:fragment="content">
+	<h2 class="h2centerleft">Добавить тему</h2> 
+		<form class="postcontainer" name="addforumtheme" th:action="@{/forum/addTheme}"
+			enctype="multipart/form-data" method="post">
+			<div>
+				<label id="labeladdnews" for="topic1"><b>Тема:</b></label>
+			</div>
+				<input type="text" name="name" id="topic1" required><br>
+			<div>
+				<label id="labeladdnews" for="text1"><b>Текст:</b></label>
+			</div>
+				<textarea rows="7" cols="40" name="description" id="text1" required></textarea>
+				<input type="hidden" th:value="${#authentication.getPrincipal().getUsername()}" name="login"/>
+			<button type="submit">Опубликовать!</button>
+		</form>
+</body>
+</html>

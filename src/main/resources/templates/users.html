@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apeiron Users Editor</title>
+</head>
+<body th:fragment="content">
+	<br>
+	<h2 class="h2centerleft">Пользователи</h2>
+	<table>
+		<thead>
+			<tr>
+				<th>Логин</th>
+				<th>E-mail</th>
+				<th>Статистика</th>
+				<th>Блокировка</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user : ${users}">
+				<td th:text="${user.login}"></td>
+				<td th:text="${user.email}"></td>
+				<td id="newseditorbutton"><div id="editnewsbutton" class="stat">
+						&#8505;
+						<div class="statinfo">
+							<table id="profitable">
+								<thead>
+									<tr>
+										<td>Матчей:</td>
+										<td><h3 th:text="${user.gamesCount}"></h3></td>
+									</tr>
+									<tr>
+										<td>Побед:</td>
+										<td><h3 th:text="${user.winsCount}"></h3></td>
+									</tr>
+									<tr>
+										<td>Рейтинг:</td>
+										<td><h3 th:text="${user.rating}"></h3></td>
+									</tr>
+							</table>
+						</div>
+					</div></td>
+				<td id="newseditorbutton"><div
+						th:if="*{#strings.contains(user.roles,'ADMIN')}">Админ</div>
+					<div th:unless="*{#strings.contains(user.roles,'ADMIN')}">
+						<div th:if="*{#strings.contains(user.roles,'BANNED')}">
+							<a th:href="@{/unban}+${user.id}">Снять</a>
+						</div>
+						<div th:unless="*{#strings.contains(user.roles,'BANNED')}">
+							<a id="deletenewsbutton"
+								onclick="return confirm('Вы уверены, что хотите заблокировать этого пользователя?\nЕсли &#34;ДА&#34; Нажмите &#34;ОК&#34;!')"
+								th:href="@{/ban}+${user.id}">&#128711;</a>
+						</div>
+					</div></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

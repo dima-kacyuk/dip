@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apeiron FAQ Editor</title>
+</head>
+<body th:fragment="content">
+	<br>
+	<h2>Изменить FAQ</h2>
+	<div id="addnewsform">
+		<form name="editfaq" th:action="@{/faq/add}"
+			enctype="multipart/form-data" method="post">
+			<div>
+				<label for="id1"><b>ID:</b></label>
+				<div id="labelid" th:text="${faq.id}"></div>
+				<input type="text" name="id" id="id1" th:value="${faq.id}" required>
+			</div>
+			<div>
+				<label for="question1"><b>Вопрос:</b></label> <input type="text"
+					name="question" id="question1" th:value="${faq.question}" required>
+			</div>
+			<div>
+				<label for="answer1"><b>Ответ:</b></label>
+				<textarea rows="10" cols="45" name="answer" id="answer1"
+					th:field="${faq.answer}" required></textarea>
+			</div>
+			<button type="submit">Сохранить!</button>
+		</form>
+	</div>
+</body>
+</html>

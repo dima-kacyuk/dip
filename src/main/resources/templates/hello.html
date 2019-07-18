@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<title>Добро пожаловать в Апеирон!</title>
+</head>
+<body th:fragment="hello">
+	<div class="welcomecontainer">
+		<div class="welcomeimgdiv">
+			<div class="notimg">Скриншот 1</div>
+			<div class="notimg">Скриншот 2</div>
+			<div class="line-break"></div>
+			<div class="notimg">Скриншот 3</div>
+			<div class="notimg">Скриншот 4</div>
+		</div>
+		<div class="welcomediv">
+			<div class="center">
+				<img src="../images/logo_a.png" height="150px">
+			</div>
+			<h2 class="centertext, colorw">Добро пожаловать в Апейрон!</h2>
+			<div class="center">
+				<a href="/registration" role="button" class="butnwidth">Регистрация</a>
+			</div>
+			<br>
+			<h3>
+				Если у вас уже есть аккант, <br>Вы можете авторизироваться:
+			</h3>
+			<br>
+			<div>
+				<form th:action="@{/login}" method="post">
+					<input type="hidden" name="${_csrf.parameterName}"
+						value="${_csrf.token}" />
+					<div>
+						<label for="name"><b>Логин:</b></label> <input type="text"
+							id="name" name="username">
+					</div>
+					<div>
+						<label for="password"><b>Пароль:</b></label> <input
+							type="password" id="password" name="password">
+					</div>
+					<div class="center">
+						<button class="butn butnwidth" type="submit">Авторизоваться</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Forum admin editor</title>
+<link rel="stylesheet" href="css/news.css">
+</head>
+<body th:fragment="content">
+	<br>
+	<table>
+		<thead>
+			<tr>
+				<th>Тема</th>
+				<th>Дата</th>
+				<th>Удалить</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="theme : ${themes}">
+				<td>
+					<div th:if="*{#strings.length(theme.name)>30}">
+						<div th:text="${#strings.substring(theme.name,0,30)}"></div>
+					</div>
+					<div th:if="*{#strings.length(theme.name)<30}">
+						<div><a th:href="@{'/forum/showTheme/' + ${theme.id}}" th:text="${theme.name}"></a></div>
+					</div>
+				</td>
+				<td id="newseditordate"
+					th:text="${#strings.substring(theme.date,0,16)}"></td>
+				<td id="newseditorbutton"><a id="deletenewsbutton"
+					th:href="@{'/forum/deleteThemeForAdmin/' + ${theme.id}}">&#10006;</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

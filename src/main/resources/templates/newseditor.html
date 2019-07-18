@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Apeiron News Editor</title>
+</head>
+<body th:fragment="content">
+	<br>
+	<h2 class="h2centerleft">Добавить новость</h2>
+	<div id="addnewsform">
+		<form name="addnews" th:action="@{/news/add}"
+			enctype="multipart/form-data" method="post">
+			<div>
+				<label id="labeladdnews" for="topic1"><b>Тема:</b></label>
+			</div>
+			<input type="text" name="topic" id="topic1" required><br>
+			<div>
+				<label id="labeladdnews" for="text1"><b>Текст:</b></label>
+			</div>
+			<textarea rows="7" cols="40" name="text" id="text1" required></textarea>
+			<button type="submit">Опубликовать!</button>
+		</form>
+	</div>
+	<br>
+	<table>
+		<thead>
+			<tr>
+				<th>Тема</th>
+				<th>Дата</th>
+				<th>Изменить</th>
+				<th>Удалить</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="post : ${news}">
+				<td>
+					<div th:if="*{#strings.length(post.topic)>30}">
+						<div th:text="${#strings.substring(post.topic,0,30)}"></div>
+					</div>
+					<div th:if="*{#strings.length(post.topic)<30}">
+						<div th:text="${post.topic}"></div>
+					</div>
+				</td>
+				<td id="newseditordate" th:text="${post.date}"></td>
+				<td id="newseditorbutton"><a th:href="@{edit}+${post.id}">&#x270e;</a></td>
+				<td id="newseditorbutton"><a id="deletenewsbutton"
+					onclick="return confirm('Вы уверены, что хотите удалить эту новость?\nЕсли &#34;ДА&#34; Нажмите &#34;ОК&#34;!')"
+					th:href="@{delete/}+${post.id}">&#10006;</a></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

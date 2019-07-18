@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Community</title>
+<link rel="stylesheet" href="css/news.css">
+</head>
+<body th:fragment="content">
+	<div class="centertext">
+		<h2 class="colorw">Топ-лист игроков:</h2>
+	</div>
+	<table>
+		<thead>
+			<tr>
+				<th><h3 class="colorwhite">Никнейм</h3></th>
+				<th><h3 class="colorwhite">Рейтинг</h3></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="user : ${users}">
+				<td class="colorwhite" th:text="${user.login}"></td>
+				<td class="colorwhite" th:text="${user.rating}"></td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>
